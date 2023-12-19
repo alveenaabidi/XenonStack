@@ -1,0 +1,107 @@
+#!/bin/bash
+
+# Command version
+VERSION="v0.1.0"
+
+# Manual page
+man_internsctl() {
+    echo "MANUAL PAGE FOR internsctl"
+    echo "--------------------------"
+    # Add manual page content here
+}
+
+# Help option
+help_internsctl() {
+    echo "Usage: internsctl [options]"
+    echo "Options:"
+    # Add help content here
+}
+
+# Version option
+version_internsctl() {
+    echo "internsctl $VERSION"
+}
+
+# CPU information
+cpu_getinfo() {
+    # Add code to fetch CPU information
+}
+
+# Memory information
+memory_getinfo() {
+    # Add code to fetch memory information
+}
+
+# User operations
+user_create() {
+    # Add code to create a new user
+}
+
+user_list() {
+    # Add code to list all regular users
+}
+
+user_list_sudo() {
+    # Add code to list users with sudo permissions
+}
+
+# File information
+file_getinfo() {
+    file=$2
+    case $3 in
+        --size | -s)
+            # Add code to fetch file size
+            ;;
+        --permissions | -p)
+            # Add code to fetch file permissions
+            ;;
+        --owner | -o)
+            # Add code to fetch file owner
+            ;;
+        --last-modified | -m)
+            # Add code to fetch last modified time
+            ;;
+        *)
+            # Add code to display basic file information
+            ;;
+    esac
+}
+
+# Main script
+case $1 in
+    man)
+        man_internsctl
+        ;;
+    --help)
+        help_internsctl
+        ;;
+    --version)
+        version_internsctl
+        ;;
+    cpu)
+        cpu_getinfo
+        ;;
+    memory)
+        memory_getinfo
+        ;;
+    user)
+        case $2 in
+            create)
+                user_create $3
+                ;;
+            list)
+                if [ "$3" = "--sudo-only" ]; then
+                    user_list_sudo
+                else
+                    user_list
+                fi
+                ;;
+        esac
+        ;;
+    file)
+        file_getinfo $@
+        ;;
+    *)
+        echo "Invalid command"
+        ;;
+esac
